@@ -1,0 +1,211 @@
+-- Machine Test Set 4 Navneet Remanand
+
+CREATE TABLE Airport (
+    airport_id NUMBER PRIMARY KEY,
+    airport_name VARCHAR2(50)
+);
+
+INSERT INTO Airport (airport_id, airport_name) 
+VALUES (1, 'IndiraGandhi Airport, Delhi');
+
+INSERT INTO Airport (airport_id, airport_name) 
+VALUES (2, 'Manchester International Airport, Manchester');
+
+INSERT INTO Airport (airport_id, airport_name) 
+VALUES (3, 'Trivandrum Int Airport');
+
+INSERT INTO Airport (airport_id, airport_name) 
+VALUES (4, 'Algiers International Airport, Algiers');
+
+INSERT INTO Airport (airport_id, airport_name) 
+VALUES (5, 'Kempegowda Airport, Bangalore');
+
+INSERT INTO Airport (airport_id, airport_name) 
+VALUES (6, 'Rajiv Gandhi Airport, Hyderabad');
+
+INSERT INTO Airport (airport_id, airport_name) 
+VALUES (7, 'Chennai Int Airport, Chennai');
+
+INSERT INTO Airport (airport_id, airport_name) 
+VALUES (8, 'Kochi Int Airport, Kochi');
+
+INSERT INTO Airport (airport_id, airport_name) 
+VALUES (9, 'Kolkata Airport');
+
+SELECT *
+FROM Airport
+
+CREATE TABLE Airline (
+    airline_id NUMBER PRIMARY KEY,
+    airline_name VARCHAR2(50)
+);
+
+INSERT INTO Airline (airline_id, airline_name) 
+VALUES (1, 'Etihad Airways');
+
+INSERT INTO Airline (airline_id, airline_name) 
+VALUES (2, 'Emirates Airways');
+
+INSERT INTO Airline (airline_id, airline_name) 
+VALUES (3, 'SpiceJet');
+
+INSERT INTO Airline (airline_id, airline_name) 
+VALUES (4, 'Vistara');
+
+INSERT INTO Airline (airline_id, airline_name) 
+VALUES (5, 'GoAir');
+
+INSERT INTO Airline (airline_id, airline_name) 
+VALUES (6, 'Air India');
+
+INSERT INTO Airline (airline_id, airline_name) 
+VALUES (7, 'Jet Airways');
+
+INSERT INTO Airline (airline_id, airline_name) 
+VALUES (8, 'Indigo');
+
+SELECT *
+FROM Airline
+
+CREATE TABLE TravelBooking (
+    booking_id NUMBER PRIMARY KEY,
+    travel_date DATE,
+    departure_airport_id NUMBER,
+    destination_airport_id NUMBER,
+    airline_id NUMBER,
+    travel_time VARCHAR2(10),
+    no_of_tickets NUMBER,
+    ticket_price_per_person NUMBER(10, 2),
+    passenger_name VARCHAR2(50), 
+    FOREIGN KEY (departure_airport_id) REFERENCES Airport(airport_id),
+    FOREIGN KEY (destination_airport_id) REFERENCES Airport(airport_id),
+    FOREIGN KEY (airline_id) REFERENCES Airline(airline_id)
+);
+
+INSERT INTO TravelBooking (booking_id, travel_date, departure_airport_id, destination_airport_id, airline_id, travel_time, no_of_tickets, ticket_price_per_person, passenger_name) 
+VALUES (1, DATE '2024-09-02', 1, 2, 1, '08:00 AM', 1, 5000, 'Navneet Remanand');
+
+INSERT INTO TravelBooking (booking_id, travel_date, departure_airport_id, destination_airport_id, airline_id, travel_time, no_of_tickets, ticket_price_per_person, passenger_name) 
+VALUES (2, DATE '2024-09-01', 3, 4, 2, '09:30 AM', 2, 6000, 'Sara M');
+
+INSERT INTO TravelBooking (booking_id, travel_date, departure_airport_id, destination_airport_id, airline_id, travel_time, no_of_tickets, ticket_price_per_person, passenger_name) 
+VALUES (3, DATE '2024-09-03', 1, 5, 3, '11:00 AM', 1, 5500, 'Deva R');
+
+INSERT INTO TravelBooking (booking_id, travel_date, departure_airport_id, destination_airport_id, airline_id, travel_time, no_of_tickets, ticket_price_per_person, passenger_name) 
+VALUES (4, DATE '2024-09-01', 3, 6, 4, '06:45 AM', 3, 4500, 'Rayan H');
+
+INSERT INTO TravelBooking (booking_id, travel_date, departure_airport_id, destination_airport_id, airline_id, travel_time, no_of_tickets, ticket_price_per_person, passenger_name) 
+VALUES (5, DATE '2024-09-02', 1, 7, 5, '02:00 PM', 4, 5200, 'Chakrapani K');
+
+INSERT INTO TravelBooking (booking_id, travel_date, departure_airport_id, destination_airport_id, airline_id, travel_time, no_of_tickets, ticket_price_per_person, passenger_name) 
+VALUES (6, DATE '2024-09-03', 3, 8, 6, '10:00 AM', 2, 6300, 'Siddharth H');
+
+INSERT INTO TravelBooking (booking_id, travel_date, departure_airport_id, destination_airport_id, airline_id, travel_time, no_of_tickets, ticket_price_per_person, passenger_name) 
+VALUES (7, DATE '2024-09-02', 3, 1, 7, '08:30 AM', 2, 5000, 'Aarti Patel');
+
+INSERT INTO TravelBooking (booking_id, travel_date, departure_airport_id, destination_airport_id, airline_id, travel_time, no_of_tickets, ticket_price_per_person, passenger_name) 
+VALUES (8, DATE '2024-09-04', 9, 1, 5, '08:30 AM', 2, 6000, 'Priya Kumar');
+
+INSERT INTO TravelBooking (booking_id, travel_date, departure_airport_id, destination_airport_id, airline_id, travel_time, no_of_tickets, ticket_price_per_person, passenger_name) 
+VALUES (9, DATE '2024-09-05', 9, 8, 8, '08:30 AM', 2, 4500, 'Maria A');
+
+SELECT *
+FROM TravelBooking
+
+CREATE TABLE Charges (
+    booking_id NUMBER PRIMARY KEY,
+    airport_tax NUMBER(10, 2),
+    handling_charges NUMBER(10, 2),
+    baggage_charges NUMBER(10, 2),
+    FOREIGN KEY (booking_id) REFERENCES TravelBooking(booking_id)
+);
+
+INSERT INTO Charges (booking_id, airport_tax, handling_charges, baggage_charges) 
+VALUES (1, 500, 200, 300);
+
+INSERT INTO Charges (booking_id, airport_tax, handling_charges, baggage_charges) 
+VALUES (2, 400, 150, 350);
+
+INSERT INTO Charges (booking_id, airport_tax, handling_charges, baggage_charges) 
+VALUES (3, 450, 250, 300);
+
+INSERT INTO Charges (booking_id, airport_tax, handling_charges, baggage_charges) 
+VALUES (4, 350, 100, 400);
+
+INSERT INTO Charges (booking_id, airport_tax, handling_charges, baggage_charges) 
+VALUES (5, 500, 250, 350);
+
+INSERT INTO Charges (booking_id, airport_tax, handling_charges, baggage_charges) 
+VALUES (6, 470, 200, 380);
+
+INSERT INTO Charges (booking_id, airport_tax, handling_charges, baggage_charges) 
+VALUES (7, 300, 150, 250);
+
+INSERT INTO Charges (booking_id, airport_tax, handling_charges, baggage_charges) 
+VALUES (8, 400, 180, 280);
+
+INSERT INTO Charges (booking_id, airport_tax, handling_charges, baggage_charges)
+VALUES (9, 250, 130, 210);
+
+SELECT *
+FROM Charges
+
+-- Question 1
+
+SELECT t.passenger_name, t.travel_date, a.airport_name AS departure_airport
+FROM TravelBooking t
+JOIN Airport a ON t.departure_airport_id = a.airport_id
+WHERE a.airport_name = 'IndiraGandhi Airport, Delhi';
+
+-- Question 2
+
+SELECT t.passenger_name, t.travel_date, a.airport_name AS departure_airport
+FROM TravelBooking t
+JOIN Airport a ON t.departure_airport_id = a.airport_id
+WHERE a.airport_name = 'Trivandrum Int Airport'
+AND TRUNC(t.travel_date) = TRUNC(SYSDATE - 1); -- To remove the time and compare only the date and matches the previous day's date
+
+-- Question 3
+
+SELECT a.airport_name, c.baggage_charges AS highest_baggage_charge
+FROM Airport a
+JOIN TravelBooking t ON a.airport_id = t.departure_airport_id
+JOIN Charges c ON t.booking_id = c.booking_id
+WHERE c.baggage_charges = (
+    SELECT MAX(c2.baggage_charges)
+    FROM Charges c2
+); 
+-- Rayan has the highest baggage charge so the output should be TVM airport
+-- c2 is used to differentiate between the instances of max charge and all the charges.
+
+-- Question 4
+
+SELECT t.passenger_name, a.airport_name AS departure_airport
+FROM TravelBooking t
+JOIN Airport a ON t.departure_airport_id = a.airport_id
+WHERE a.airport_name = 'Trivandrum Int Airport';
+
+-- Question 5
+
+SELECT a.airport_name, COUNT(t.passenger_name) AS passenger_count
+FROM Airport a
+JOIN TravelBooking t ON t.departure_airport_id = a.airport_id
+GROUP BY a.airport_name;
+
+-- Question 6
+
+SELECT t.passenger_name, t.travel_date
+FROM TravelBooking t
+WHERE TRUNC(t.travel_date) BETWEEN TRUNC(SYSDATE + 1) AND TRUNC(SYSDATE + 2); -- shows people travelling on 09/04/2024 and 09/05/2024
+
+-- Question 7
+
+SELECT t.passenger_name, t.no_of_tickets AS tickets_bought
+FROM TravelBooking t
+WHERE t.no_of_tickets > 1;
+
+-- Question 8
+
+SELECT t.passenger_name, t.ticket_price_per_person AS Ticket_Price
+FROM TravelBooking t
+ORDER BY t.ticket_price_per_person DESC;
